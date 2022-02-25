@@ -1,0 +1,32 @@
+with "/opt/ada/2021/share/gpr/adabase.gpr";
+with "/opt/GNAT/2021/share/gpr/gnatcoll.gpr";
+with "/opt/GNAT/2021/share/gpr/gnatcoll_syslog.gpr";
+
+project Intsage is
+
+   for Source_Dirs use ("/home/src/build/Ada/intsage/src");
+   for Object_Dir use "obj";
+   for Main use ("intsage.adb");
+   for Languages use ("Ada", "C");
+
+   package Compiler is
+      for Switches ("ada") use ("-g", "-gnata", "-fcallgraph-info=su,da", "-gnatVcdefimoprst", "-gnatw.a.b.c.d.f.g.h.i.j.k.l.m.o.p.q.r.s.t.u.v.w.x.z_c_rcdfghijklmopqrtuvwxyz", "-gnatyABCIOSabcdefhiklnoprstux");
+      for Switches ("c") use ("-Wall", "-DNETSNMP_ENABLE_IPV6", "-fno-strict-aliasing", "-fmessage-length=0", "-grecord-gcc-switches", "-O2", "-Wall", "-D_FORTIFY_SOURCE=2", "-fstack-protector-strong", "-funwind-tables", 
+         "-fasynchronous-unwind-tables", "-fstack-clash-protection", "-g", "-Ulinux", "-Dlinux=linux", "-D_REENTRANT", "-D_GNU_SOURCE", "-DPERL_USE_SAFE_PUTENV", "-fwrapv", "-fno-strict-aliasing", "-pipe", 
+         "-fstack-protector-strong", "-D_LARGEFILE_SOURCE", "-D_FILE_OFFSET_BITS=64", "-I/usr/lib/perl5/5.26.1/x86_64-linux-thread-multi/CORE", "-I.", "-I/usr/include");
+   end Compiler;
+
+   package Linker is
+      for Switches ("ada") use ("-lmariadb", "-lnetsnmp", "-lpthread", "-lssl", "-lcrypto", "-Wl,-z,relro", "-Wl,-z,now", "-lm", "-g");
+   end Linker;
+
+   package Ide is
+      for Vcs_Kind use "git";
+   end Ide;
+
+   package Binder is
+      for Switches ("ada") use ("-E");
+   end Binder;
+
+end Intsage;
+
